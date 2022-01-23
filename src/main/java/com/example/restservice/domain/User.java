@@ -4,8 +4,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import com.example.restservice.dto.request.UserRequest;
-
 @Data
 @Table("users")
 public class User {
