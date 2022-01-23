@@ -12,10 +12,10 @@ public interface UserRepository extends CrudRepository<User, String> {
 
     // 全ユーザーを取得
     @Query("SELECT * FROM users ORDER BY id ASC")
-    List<User> getUsers();
+    List<User> findUsers();
 
     // idで指定したユーザーを取得
     @Query("SELECT * FROM users WHERE id = :id")
-    User getUserById(int id);
+    User findUserById(Integer id);
 
 }
