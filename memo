@@ -4,7 +4,14 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "password":"password0123"
 }' http://localhost:8080/login
 
+
 # logout
 curl -X DELETE -H "Content-Type: application/json" -d '{
   "token":"04RJVriFF5qZcVo9"
 }' http://localhost:8080/logout
+
+
+# auth
+curl -X POST -H "Content-Type: application/json" -d '{
+  "token":"y7oWAR6f2hSvfJpj"
+}' http://localhost:8080/auth

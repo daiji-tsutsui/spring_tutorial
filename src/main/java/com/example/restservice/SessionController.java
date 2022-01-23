@@ -48,23 +48,31 @@ public class SessionController {
 
   @RequestMapping(path="/logout", method=RequestMethod.DELETE)
   public User logout(@RequestBody SessionRequest req) {
-    Session session = dao.findSessionByToken(req.getToken());
-    User user = userDao.findUserById(session.getUserId());
+    String token = req.getToken();
+    User user = getLoginUserByToken(token);
+    Session session = dao.findSessionByToken(token);
     dao.delete(session);
     return user;
   }
 
-  // @RequestMapping(path="/auth", method=RequestMethod.GET)
-  // public User authGet(@PathVariable String token) {
-  //   Session session = dao.findSessionByToken(token);
-  //   User user = dao.findUserById(session.getUserId());
-  //   return user;
-  // }
+  @RequestMapping(path="/auth", method=RequestMethod.GET)
+  public User authGet(@RequestParam(value = "token", defaultValue = "") String token) {
+    return getLoginUserByToken(token);
+  }
 
-  // @RequestMapping(path="/auth", method=RequestMethod.POST)
-  // public User authPost(@RequestBody SessionRequest req) {
-  //   Session session = dao.findSessionByToken(req.getToken());
-  //   User user = dao.findUserById(session.getUserId());
-  //   return user;
-  // }
+  @RequestMapping(path="/auth", method=RequestMethod.POST)
+  public User authPost(@RequestBody SessionRequest req) {
+    return getLoginUserByToken(req.getToken());
+  }
+
+  public User getLoginUserByToken(String token) {
+    Session session = dao.findSessionByToken(token);
+    if (session != null) {
+      User user = userDao.findUserById(session.getUserId());
+      return user;
+    } else {
+      logger.error("No sessions with token: " + token);
+    }
+    return null;
+  }
 }
