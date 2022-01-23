@@ -1,0 +1,10 @@
+# login
+curl -X POST -H "Content-Type: application/json" -d '{
+  "name":"Daiji2",
+  "password":"password0123"
+}' http://localhost:8080/login
+
+# logout
+curl -X DELETE -H "Content-Type: application/json" -d '{
+  "token":"04RJVriFF5qZcVo9"
+}' http://localhost:8080/logout

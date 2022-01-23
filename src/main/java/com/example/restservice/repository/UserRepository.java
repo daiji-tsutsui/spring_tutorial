@@ -18,4 +18,7 @@ public interface UserRepository extends CrudRepository<User, String> {
     @Query("SELECT * FROM users WHERE id = :id")
     User findUserById(Integer id);
 
+    // 名前とパスワードからユーザーIDを取得
+    @Query("SELECT id FROM users WHERE name = :name AND password = :password")
+    Integer getIdByNameAndPassword(String name, String password);
 }

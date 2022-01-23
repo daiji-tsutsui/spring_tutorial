@@ -16,9 +16,24 @@ public class Session {
 
   public Session(Integer id, String token, Integer userId, String params) {
     this.id = id;
-    this.token = token;
     this.userId = userId;
     this.params = params;
+    this.token = (token == null || token.length() == 0) ? createToken() : token;
+  }
+
+  private String createToken() {
+    Integer length = 16;
+    String alphaNumerics = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            + "abcdefghijklmnopqrstuvwxyz"
+                            + "0123456789";
+    String hashed = "";
+
+    for (int i = 0; i < length; i++) {
+      int index = (int)(alphaNumerics.length() * Math.random());
+      hashed += alphaNumerics.charAt(index);
+    }
+
+    return hashed;
   }
 
 }

@@ -10,11 +10,11 @@ import com.example.restservice.domain.Session;
 @Repository
 public interface SessionRepository extends CrudRepository<Session, String> {
 
-    // 全ユーザーを取得
+    // 全セッションを取得
     @Query("SELECT * FROM sessions ORDER BY id ASC")
     List<Session> findSessions();
 
-    // idで指定したユーザーを取得
+    // tokenで指定したセッションのIDを取得
     @Query("SELECT * FROM sessions WHERE token = :token")
     Session findSessionByToken(String token);
 
